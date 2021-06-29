@@ -1,0 +1,29 @@
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-10 col-12 mx-auto">
+      <div class="card-columns">
+        {{#each restaurants}}
+        <a href="/restaurants/{{this.id}}" class="text-secondary">
+          <div class="card mb-3">
+            <div class="card-img-top" style="background-image:url({{this.image}});">
+                <div class="restaurantTitle" title="看餐廳介紹">{{this.name}}</div>
+            </div>
+            <div class="card-body p-3 d-flex justify-content-between">
+              <div class="restaurant-category mb-1">
+                <i class="fas fa-utensils pr-2"></i> {{this.category}}
+              </div>
+
+              <span class="badge badge-pill badge-danger font-weight-normal d-flex align-items-center justify-content-between" style="width: 50px;">
+                {{this.rating}}
+                <i class="fas fa-star fa-xs"></i>
+              </span>
+
+            </div>
+          </div>
+        </a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
