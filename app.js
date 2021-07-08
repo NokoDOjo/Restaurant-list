@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const port = 3000
+const Restaurant = require('./models/restaurant')
 // require handlebars in the project
 const exphbs = require('express-handlebars')
 
@@ -30,7 +31,10 @@ app.use(express.urlencoded({ extended: true }))
 
 // routes setting
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results })
+  Restaurant.find()
+    .lean() 
+    .then( restaurants => res.render('index', { restaurants }) )
+    .catch( error => console.log(error))
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
