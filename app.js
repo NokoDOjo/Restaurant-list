@@ -1,17 +1,32 @@
 // app.js
 // require packages used in the project
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const port = 3000
-
 // require handlebars in the project
 const exphbs = require('express-handlebars')
-const restaurantList = require('./restaurant.json')
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
+
+// 取得資料庫連線狀態
+const db = mongoose.connection
+// 連線異常
+db.on('error', () => {
+  console.log('mongodb error')
+})
+// 連線成功
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
+
+
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
+// Body-parser
+app.use(express.urlencoded({ extended: true }))
 
 // routes setting
 app.get('/', (req, res) => {
@@ -31,6 +46,10 @@ app.get('/search', (req, res) => {
     return restaurant.name.toLowerCase().includes(keyword)||restaurant.category.includes(keyword)
   })
   res.render('index', {restaurants: restaurants})
+})
+
+app.get('restaurants/new', (req, res) => {
+  return res.render('new')
 })
 // start and listen on the Express server
 app.listen(port, () => {
