@@ -21,7 +21,7 @@
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurants}}
-        <a href="/restaurants/{{this.id}}" class="text-secondary">
+        <a href="/restaurants/{{this._id}}" class="text-secondary">
           <div class="card mb-3">
             <div class="card-img-top" style="background-image:url({{this.image}});">
                 <div class="restaurantTitle" title="看餐廳介紹">{{this.name}}</div>
@@ -36,6 +36,12 @@
                 <i class="fas fa-star fa-xs"></i>
               </span>
             </div>
+          </div>
+          <div class="restaurant-button-group d-flex container justify-content-end align-items-center p-0 mb-3">
+            <a class="btn btn-success m-1" href="/restaurants/{{ this._id }}/edit" role="button">Edit</a>
+            <a class="btn btn-info m-1" href="/restaurants/{{ this._id }}" role="button">Detail</a>
+            <button type="button" class="btn btn-dark m-1 deleteButton" data-toggle="modal"
+              data-target="#deleteModal{{ this._id }}">Delete</button>
           </div>
         </a>
         {{/each}}
