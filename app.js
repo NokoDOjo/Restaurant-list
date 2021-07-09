@@ -50,16 +50,13 @@ app.get('/restaurants/search', (req, res) => {
             restaurant.name.toLowerCase().includes(keyword) ||
             restaurant.category.includes(keyword)
         )
+        if ( restaurants.length === 0) {
+          return res.render('index', {
+            keyword: '您輸入的關鍵字沒有相關搜尋結果，請再重新輸入一次'
+          })
+        }
         return res.render('index', {
           restaurants, keyword: req.query.keyword.trim()
-        })
-
-      }
-      if (restaurants.length === 0) {
-        console.log('restaurants.length', restaurants.length)
-        res.render('index', {
-          keyword: req.query.keyword,
-          no_result: `<h3> 沒有"${req.query.keyword}"的搜尋結果，請輸入正確的餐廳名稱</h3>`,
         })
       }
     })
