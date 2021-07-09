@@ -40,12 +40,32 @@
             <div class="restaurant-button-group d-flex container justify-content-end align-items-center p-0 mb-3">
               <a class="btn btn-success m-1" href="/restaurants/{{ this._id }}/edit" role="button">Edit</a>
               <a class="btn btn-info m-1" href="/restaurants/{{ this._id }}" role="button">Detail</a>
-              <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
-                <button class="btn btn-dark m-1" type="submit">delete</button>
-              </form>
+              <button class="btn btn-dark m-1" type="submit" data-toggle="modal" data-target="#delete{{ this._id }}">delete</button>
             </div>
           </div>
         </a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="delete{{ this._id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Hint Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                您確定要刪除 {{ this.name }}餐廳 嗎？
+              </div>
+              <div class="modal-footer">
+                <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+                  <button class="btn btn-dark m-1" type="submit" data-toggle="modal" data-target="#delete{{ this._id }}">是</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
         {{/each}}
         <a href="./restaurants/new">
           <div class="card mb-3">

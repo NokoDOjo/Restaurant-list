@@ -48,9 +48,29 @@
       <div class="restaurant-button-group d-flex container justify-content-end align-items-center p-0 mb-3">
         <a class="btn btn-success m-1" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
         <a class="btn btn-info m-1" href="/" role="button">Back</a>
-        <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
-          <button class="btn btn-dark m-1" type="submit">delete</button>
-        </form>
+        <button class="btn btn-dark m-1" type="submit" data-toggle="modal" data-target="#delete{{ restaurant._id }}">delete</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="delete{{ restaurant._id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Hint Message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            您確定要刪除 {{ restaurant.name }}餐廳 嗎？
+          </div>
+          <div class="modal-footer">
+            <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
+              <button class="btn btn-dark m-1" type="submit">是</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
