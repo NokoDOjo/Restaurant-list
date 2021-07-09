@@ -5,10 +5,10 @@
       <h1>想知道哪裡有美食 ?</h1>
       <div class="container search-bar">
         <div class="search-bar-inner">
-          <form action="/search">
+          <form action="/restaurants/search">
             <div class="input-group">
               <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-                value="" aria-describedby="search-button">
+                value="{{keyword}}" aria-describedby="search-button">
               <div class="input-group-append">
                 <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
               </div>
@@ -18,10 +18,11 @@
       </div>
   </div>
   <div class="row">
+    {{{no_result}}}
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurants}}
-        <a href="/restaurants/{{this._id}}" class="text-secondary">
+        <a href="/restaurants/{{this._id}}" class="text-secondary" style="text-decoration: none;">
           <div class="card mb-3">
             <div class="card-img-top" style="background-image:url({{this.image}});">
                 <div class="restaurantTitle" title="看餐廳介紹">{{this.name}}</div>

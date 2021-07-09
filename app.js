@@ -38,12 +38,32 @@ app.get('/', (req, res) => {
     .catch( error => console.log(error))
 })
 
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword.toLowerCase().trim()
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword)||restaurant.category.includes(keyword)
-  })
-  res.render('index', { restaurants })
+// Search route
+app.get('/restaurants/search', (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase()
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => {
+      if (keyword) {
+        restaurants = restaurants.filter(
+          (restaurant) =>
+            restaurant.name.toLowerCase().includes(keyword) ||
+            restaurant.category.includes(keyword)
+        )
+        return res.render('index', {
+          restaurants, keyword: req.query.keyword.trim()
+        })
+
+      }
+      if (restaurants.length === 0) {
+        console.log('restaurants.length', restaurants.length)
+        res.render('index', {
+          keyword: req.query.keyword,
+          no_result: `<h3> 沒有"${req.query.keyword}"的搜尋結果，請輸入正確的餐廳名稱</h3>`,
+        })
+      }
+    })
+    .catch((error) => console.error(error))
 })
 // Add create route
 app.get('/restaurants/new', (req, res) => {
