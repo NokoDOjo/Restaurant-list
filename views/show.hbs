@@ -48,8 +48,9 @@
       <div class="restaurant-button-group d-flex container justify-content-end align-items-center p-0 mb-3">
         <a class="btn btn-success m-1" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
         <a class="btn btn-info m-1" href="/" role="button">Back</a>
-        <button type="button" class="btn btn-dark m-1 deleteButton" data-toggle="modal"
-          data-target="#deleteModal{{ restaurant._id }}">Delete</button>
+        <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
+          <button class="btn btn-dark m-1" type="submit">delete</button>
+        </form>
     </div>
   </div>
 </div>

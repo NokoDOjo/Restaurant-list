@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 const restaurantList = require('./restaurant.json')
-const Restaurant = require('./models/restaurant')
+const Restaurant = require('./models/restaurant')  //載入restaurant model
 // require handlebars in the project
 const exphbs = require('express-handlebars')
 
@@ -43,9 +43,9 @@ app.get('/search', (req, res) => {
   const restaurants = restaurantList.results.filter(restaurant => {
     return restaurant.name.toLowerCase().includes(keyword)||restaurant.category.includes(keyword)
   })
-  res.render('index', {restaurants: restaurants})
+  res.render('index', { restaurants })
 })
-// Add create function
+// Add create route
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
@@ -80,7 +80,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   const editRestaurant = req.body
-  
+
   return Restaurant.findById(id)
     .then((restaurant) => {
       restaurant.name = editRestaurant.name
@@ -95,6 +95,14 @@ app.post('/restaurants/:id/edit', (req, res) => {
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+// Add delete route
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
