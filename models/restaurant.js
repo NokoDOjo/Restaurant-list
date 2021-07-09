@@ -6,8 +6,7 @@ const restaurantSchema = new Schema({
     required: true
   },
   name_en: {
-    type: String,
-    required: true
+    type: String
   },
   category: {
     type: String,
@@ -34,10 +33,6 @@ const restaurantSchema = new Schema({
     required: true
   },
   rating: {
-    type: Number,
-    required: true
-  },
-  id: {
     type: Number,
     required: true
   }

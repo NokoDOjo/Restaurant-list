@@ -1,0 +1,56 @@
+<div class="container py-5">
+<form action="/restaurants" method="POST">
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="name">餐廳名稱</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="請輸入餐廳名稱" required>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="name_en">餐廳英文名稱</label>
+    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="請輸入餐廳英文名稱">
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="category">餐廳類別</label>
+    <select class="form-control" id="category" name="category" required>
+      <option>美式</option>
+      <option>義式餐廳</option>
+      <option>港式</option>
+      <option>日本料理</option>
+      <option>咖啡</option>
+      <option>酒吧</option>
+    </select>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="rating">餐廳評分</label>
+    <input type="number" class="form-control" id="rating" name="rating" placeholder="請輸入餐廳評分" required>
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="location">餐廳地址</label>
+    <input type="text" class="form-control" id="location" name="location" placeholder="請輸入餐廳地址" required> 
+  </div>
+  <div class="form-group col-md-6">
+    <label for="google_map">餐廳地圖</label>
+    <input type="text" class="form-control" id="google_map" name="google_map" placeholder="請輸入餐廳評分" required>
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="phone">餐廳電話</label>
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="請輸入餐廳電話" required>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="image">餐廳圖片位址</label>
+    <input type="text" class="form-control" id="image" name="image" placeholder="請輸入餐廳圖片位址" required>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="description">餐廳簡介</label>
+    <textarea class="form-control" id="description" rows="3" name="description" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">ADD</button>
+</form>
+</div>

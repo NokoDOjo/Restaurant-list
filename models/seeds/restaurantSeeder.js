@@ -11,8 +11,9 @@ db.on('error', () => {
   console.log('mongodb error')
 })
 // 連線成功
+// 載入餐廳資料
 db.once('open', () => {
-  for (let i = 1; i < restaurantList.length; i++) {
+  for (let i = 0; i < restaurantList.length; i++) {
     Restaurant.create({ 
       ...restaurantList[i]
     })
