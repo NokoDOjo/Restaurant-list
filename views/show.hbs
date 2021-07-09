@@ -2,13 +2,16 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      <p class="mt-5 mb-1">
+      <div class="row mt-5 mb-1 d-flex justify-content-between">
         <span class="text-secondary">
           <i class="fas fa-store-alt"></i>
-          名稱：
+          名稱：{{restaurant.name}}
         </span>
-        {{restaurant.name}}
-      </p>
+        <span class="badge badge-pill badge-danger font-weight-normal d-flex align-items-center justify-content-between" style="width: 50px;">
+          {{restaurant.rating}}
+          <i class="fas fa-star fa-xs"></i>
+        </span>
+      </div>
       
       <p class="mb-1">
         <span class="text-secondary">
@@ -40,10 +43,13 @@
       <p class="mb-5">
         {{restaurant.description}}
       </p>
-
-      <img class="rounded mx-auto d-block mb-4 w-100"
-        src="{{restaurant.image}}" alt="{{restaurant.name}}"
-        style="max-width: 600px;">
+      <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}" style="max-width: 600px;">
+    </div>
+      <div class="restaurant-button-group d-flex container justify-content-end align-items-center p-0 mb-3">
+        <a class="btn btn-success m-1" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
+        <a class="btn btn-info m-1" href="/" role="button">Back</a>
+        <button type="button" class="btn btn-dark m-1 deleteButton" data-toggle="modal"
+          data-target="#deleteModal{{ restaurant._id }}">Delete</button>
     </div>
   </div>
 </div>

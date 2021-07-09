@@ -59,13 +59,43 @@ app.post('/restaurants', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-// Add view details function
+// Add show details route
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
     .catch((error) => console.log(error))
+})
+// Add edit route
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const editRestaurant = req.body
+  
+  return Restaurant.findById(id)
+    .then((restaurant) => {
+      restaurant.name = editRestaurant.name
+      restaurant.name_en = editRestaurant.name_en
+      restaurant.category = editRestaurant.category
+      restaurant.image = editRestaurant.image
+      restaurant.location = editRestaurant.location
+      restaurant.phone = editRestaurant.phone
+      restaurant.google_map = editRestaurant.google_map
+      restaurant.rating = editRestaurant.rating
+      restaurant.description = editRestaurant.description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
 })
 
 // start and listen on the Express server
