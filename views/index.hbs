@@ -59,7 +59,7 @@
                 您確定要刪除 {{ this.name }}餐廳 嗎？
               </div>
               <div class="modal-footer">
-                <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+                <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
                   <button class="btn btn-dark m-1" type="submit" data-toggle="modal" data-target="#delete{{ this._id }}">是</button>
                 </form>
               </div>
