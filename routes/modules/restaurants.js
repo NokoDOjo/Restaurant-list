@@ -3,25 +3,6 @@ const mongoose = require('mongoose')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
-// Search route
-router.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  const keywordRegExp = new RegExp(keyword, 'i')
-  Restaurant.find({
-    $or: [{
-      name: {
-        $regex: keywordRegExp
-      },
-    }, {
-      category: {
-        $regex: keywordRegExp
-      }
-    }]
-  })
-    .lean()
-    .then( restaurants => res.render('index', { restaurants, keyword }))
-    .catch((error) => console.error(error))
-})
 // Add create route
 router.get('/new', (req, res) => {
   return res.render('new')
@@ -36,6 +17,7 @@ router.post('/', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+
 // Add show details route
 router.get('/:id', (req, res) => {
   const id = req.params.id
@@ -45,6 +27,7 @@ router.get('/:id', (req, res) => {
     .then((restaurant) => res.render('show', { restaurant }))
     .catch((error) => console.log(error))
 })
+
 // Add edit route
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
