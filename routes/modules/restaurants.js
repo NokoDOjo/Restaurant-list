@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
@@ -38,6 +39,7 @@ router.post('/', (req, res) => {
 // Add show details route
 router.get('/:id', (req, res) => {
   const id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
@@ -46,7 +48,7 @@ router.get('/:id', (req, res) => {
 // Add edit route
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
-
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
@@ -55,19 +57,12 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
   const editRestaurant = req.body
 
   return Restaurant.findById(id)
     .then((restaurant) => {
-      restaurant.name = editRestaurant.name
-      restaurant.name_en = editRestaurant.name_en
-      restaurant.category = editRestaurant.category
-      restaurant.image = editRestaurant.image
-      restaurant.location = editRestaurant.location
-      restaurant.phone = editRestaurant.phone
-      restaurant.google_map = editRestaurant.google_map
-      restaurant.rating = editRestaurant.rating
-      restaurant.description = editRestaurant.description
+      Object.assign(restaurant, editRestaurant)
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
@@ -76,6 +71,7 @@ router.put('/:id', (req, res) => {
 // Add delete route
 router.delete('/:id', (req, res) => {
   const id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
