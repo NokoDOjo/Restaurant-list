@@ -4,26 +4,21 @@ const Restaurant = require('../../models/restaurant')
 
 // Search route
 router.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim().toLowerCase()
-  Restaurant.find()
-    .lean()
-    .then((restaurants) => {
-      if (keyword) {
-        restaurants = restaurants.filter(
-          (restaurant) =>
-            restaurant.name.toLowerCase().includes(keyword) ||
-            restaurant.category.includes(keyword)
-        )
-        if (restaurants.length === 0) {
-          return res.render('index', {
-            keyword: '您輸入的關鍵字沒有相關搜尋結果，請再重新輸入一次'
-          })
-        }
-        return res.render('index', {
-          restaurants, keyword: req.query.keyword.trim()
-        })
+  const keyword = req.query.keyword
+  const keywordRegExp = new RegExp(keyword, 'i')
+  Restaurant.find({
+    $or: [{
+      name: {
+        $regex: keywordRegExp
+      },
+    }, {
+      category: {
+        $regex: keywordRegExp
       }
-    })
+    }]
+  })
+    .lean()
+    .then( restaurants => res.render('index', { restaurants, keyword }))
     .catch((error) => console.error(error))
 })
 // Add create route
