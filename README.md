@@ -9,7 +9,7 @@
 - 可以在首頁和餐廳詳細資料頁面點擊Edit鍵來編輯餐廳資料
 - 可以在首頁和餐廳詳細資料頁面點擊Delete鍵來編輯餐廳資料
 
-## 優化方向
+## 後續優化方向
 - 登入註冊功能
 - 加入收藏清單
 - UI優化
@@ -48,5 +48,5 @@ Express is listening on localhost:3000
 
 ## Image
 ![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/%E6%93%B7%E5%8F%96.PNG)
-![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/%E6%93%B7%E5%8F%962.PNG)
-![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/%E6%93%B7%E5%8F%963.PNG)
+![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/screenshots/%E6%93%B7%E5%8F%962.PNG)
+![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/screenshots/%E6%93%B7%E5%8F%963.PNG)
