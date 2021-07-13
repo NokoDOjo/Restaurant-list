@@ -60,8 +60,8 @@ router.put('/:id', (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
   const editRestaurant = req.body
 
-  return Restaurant.findById(id)
-    .then((restaurant) => {
+  return Restaurant.findById( id, (err, restaurant) => { 
+      if (err) return console.error(err)
       Object.assign(restaurant, editRestaurant)
       return restaurant.save()
     })
