@@ -1,9 +1,15 @@
 const bcrypt = require('bcryptjs')
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const Restaurant = require('../restaurant')
 const restaurantList = require('../../restaurant.json').results
 const User = require('../user')
 const userList = require('../../user.json').results
 const db = require('../../config/mongoose')
+
 
 // 連線成功
 // 載入餐廳資料
