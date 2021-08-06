@@ -10,10 +10,11 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res) => {
   const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
+  const userId = req.user._id
   if (!name || !category || !image || !location || !phone || !google_map || !rating || !description) {
     return res.render('new', { errorMsg })
   }
-  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })
+  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description, userId })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })

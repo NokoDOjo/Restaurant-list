@@ -12,15 +12,11 @@ router.get('/', (req, res) => {
   sortObject[sortField] = sortOrder;
 
   Restaurant.find({
-    $or: [{
-      name: {
-        $regex: keywordRegExp
-      },
-    }, {
-      category: {
-        $regex: keywordRegExp
-      }
-    }]
+    userId: req.user._id,
+    $or: [
+      { name: { $regex: keywordRegExp }}, 
+      { category: { $regex: keywordRegExp }}
+    ]
   })
     .sort(sortObject)
     .lean()
