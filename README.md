@@ -6,14 +6,11 @@
 - 可以點擊Detail或餐廳圖卡進去看餐廳的詳細資訊，包含類別、地址、電話、描述、圖片
 - 可以根據餐廳名稱或分類來搜尋到特定的餐廳
 - 可以按下 + 圖卡進入新增頁面來添加新的餐廳
-- 可以在首頁和餐廳詳細資料頁面點擊Edit鍵來編輯餐廳資料
-- 可以在首頁和餐廳詳細資料頁面點擊Delete鍵來編輯餐廳資料
+- 可以新增、修改、刪除餐廳的資訊
 - 可以在首頁更改餐廳的排序方式(名稱、類別、評分)
+- 使用者可以註冊帳號或是用 Facebook & Google Login 直接登入，建立並管理專屬他的一個餐廳清單
 
-## 後續優化方向
-- 登入註冊功能
-- 加入收藏清單
-- UI優化
+
 
 ## 環境建置 Environment Setup
 
@@ -21,7 +18,7 @@
 2. mongoose
 3. mongodb
 4. Robo 3T
-5. bootstrap
+5. bootswatch
 6. Font awesome
 
 ## 安裝 Installing
@@ -38,16 +35,24 @@ cd Restaurant-list
 ```
 npm install
 ```
-4. 啟動專案
+4. 設定環境變數
+```
+將檔案 .env.example 檔名改為 .env
+若要使用 facebook login ，則需要先在 [Facebook for Developers](https://developers.facebook.com/?locale=zh_TW) 中建立應用程式，將應用程式編號和密鑰填入 .env，即可使用 facebook login 功能。
+
+若要使用 google login ，則需要先在 [google api](https://console.cloud.google.com/apis) 中建立應用程式，將用戶端ID和密鑰填入 .env，即可使用 google login 功能。
+```
+5. 啟動種子資料
+```
+npm run seed
+```
+6. 啟動專案
 ```
 npm run dev
 ```
-5. 出現以下訊息後，即可在 http://localhost:3000 開始使用
+7. 出現以下訊息後，即可在 http://localhost:3000 開始使用
 ```
 Express is listening on localhost:3000
 ```
 
-## Image
-![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/%E6%93%B7%E5%8F%96.PNG)
-![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/screenshots/%E6%93%B7%E5%8F%962.PNG)
-![image](https://github.com/NokoDOjo/Restaurant-list/blob/main/screenshots/%E6%93%B7%E5%8F%963.PNG)
+
