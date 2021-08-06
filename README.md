@@ -36,12 +36,12 @@ cd Restaurant-list
 npm install
 ```
 4. 設定環境變數
-```
+
 將檔案 .env.example 檔名改為 .env
 若要使用 facebook login ，則需要先在 [Facebook for Developers](https://developers.facebook.com/?locale=zh_TW) 中建立應用程式，將應用程式編號和密鑰填入 .env，即可使用 facebook login 功能。
 
 若要使用 google login ，則需要先在 [google api](https://console.cloud.google.com/apis) 中建立應用程式，將用戶端ID和密鑰填入 .env，即可使用 google login 功能。
-```
+
 5. 啟動種子資料
 ```
 npm run seed
