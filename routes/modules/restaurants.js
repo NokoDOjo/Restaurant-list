@@ -21,9 +21,10 @@ router.post('/', (req, res) => {
 
 // Add show details route
 router.get('/:id', (req, res) => {
-  const id = req.params.id
-  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
-  return Restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.redirect('back')
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
     .catch((error) => console.log(error))
@@ -31,32 +32,35 @@ router.get('/:id', (req, res) => {
 
 // Add edit route
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
-  return Restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.redirect('back')
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
 
 router.put('/:id', (req, res) => {
-  const id = req.params.id
-  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
+  const userId = req.user._id
+  const _id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.redirect('back')
   const editRestaurant = req.body
 
-  return Restaurant.findById( id, (err, restaurant) => { 
+  return Restaurant.findOne( { _id, userId }, (err, restaurant) => { 
       if (err) return console.error(err)
       Object.assign(restaurant, editRestaurant)
       return restaurant.save()
     })
-    .then(() => res.redirect(`/restaurants/${id}`))
+    .then(() => res.redirect(`/restaurants/${_id}`))
     .catch(error => console.log(error))
 })
 // Add delete route
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
-  return Restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.redirect('back')
+  return Restaurant.findOne({ _id, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
