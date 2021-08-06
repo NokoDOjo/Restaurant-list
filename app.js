@@ -40,6 +40,7 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.login_msg = req.flash('login_msg')
   next()
 })
 // routes
