@@ -1,0 +1,15 @@
+{
+  "results": [{
+      "name": "葛格",
+      "email": "bigbro@gmail.com",
+      "password": "12345",
+      "ownedRestaurantID": [1, 2, 3]
+    },
+    {
+      "name": "底迪",
+      "email": "lilbro@gmail.com",
+      "password": "12345",
+      "ownedRestaurantID": [4, 5, 6]
+    }
+  ]
+}
